@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>ArteMorfosis</title>  
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/Captura_de_pantalla_2024-09-21_220414-removebg-preview.png" widtch="100" type="image/png">
+
+    <style>
+        body {
+    font-family: 'Fraunces', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF; /* Fondo blanco */
+    color: #000000; /* Texto negro */
+    position: relative; /* Para posicionar la imagen de fondo */
+    overflow: auto; /* Permite desplazamiento */
+
+        .navbar {
+            background-color: #F0B300;
+            padding: 10px;
+            display: flex;
+            justify-content: center; /* Centrar el contenido */
+            align-items: center;
+            position: relative; /* Para que el menú esté por encima de la imagen */
+            z-index: 1; /* Asegura que el menú esté encima de la imagen */
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 20px; /* Espaciado entre los elementos del menú */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+
+        .main-image {
+            position: relative; /* Para que esté en el flujo normal */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 0; /* Asegura que esté detrás del menú */
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto; /* Mantiene la proporción de la imagen */
+            object-fit: cover; /* Mantiene la proporción y cubre todo el área */
+        }
+
+        .products-section {
+            background-color: white;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .products-section button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: 2px solid #ddd;
+            border-radius: 20px; /* Bordes redondeados */
+            font-family: 'Fraunces', serif; /* Cambiar tipografía */
+            cursor: pointer;
+        }
+
+        .products-section button:nth-child(odd) {
+            background-color: #EB7A2A; /* Color para botones impares */
+            color: white; /* Texto blanco */
+        }
+
+        .products-section button:nth-child(even) {
+            background-color: #48287b; /* Color para botones pares */
+            color: white; /* Texto blanco */
+        }
+
+        .container {
+            margin: 20px auto;
+        }
+
+        .image-button {
+            border: 3px solid #F0B300; /* Color del borde del botón de imagen */
+            border-radius: 20px;
+            padding: 10px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .image-button img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .carousel img {
+            border-radius: 15px;
+            margin: 5px;
+            cursor: pointer;
+            width: 170px;
+            height: 170px;
+        }
+
+        /* Carrusel MDF */
+        #mdf-carousel img {
+            border: 3px solid #F0B300;
+        }
+
+        /* Carrusel Cerámica */
+        #ceramica-carousel img {
+            border: 3px solid #EF005B;
+        }
+
+        /* Carrusel Plantas */
+        #plantas-carousel img {
+            border: 3px solid #48287B;
+        }
+
+        .info-producto {
+        margin: 20px auto; /* Centra horizontalmente */
+        padding: 15px;
+        border-radius: 10px;
+        display: none; /* Ocultar inicialmente */
+        background-color: #f0f0f0; /* Color de fondo neutro */
+        text-align: center;
+        width: 300px; /* Fija el ancho del rectángulo */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle efecto de rectángulo */
+    }
+
+    /* Estilo adicional para centrar texto */
+    .info-producto h2, .info-producto p {
+        margin: 10px 0; /* Espaciado entre el título y la descripción */
+        text-align: center;
+        color: #FFFFFF;
+    }
+        /* Estilos para productos MDF */
+        #info-mdf1, #info-mdf2, #info-mdf3, #info-mdf4, #info-mdf5, #info-mdf6, #info-mdf7, #info-mdf8{
+            background-color: #F0B300;
+        }
+
+        /* Estilos para productos Cerámica */
+        #info-ceramica1, #info-ceramica2, #info-ceramica3, #info-ceramica4, #info-ceramica5, #info-ceramica6, #info-ceramica7 {
+            background-color: #EF005B;
+        }
+
+        /* Estilos para productos Plantas */
+        #info-planta1, #info-planta2, #info-planta3 {
+            background-color: #48287B;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            background-color: #EF005B;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer .social-links {
+            margin-bottom: 20px;
+        }
+
+        .footer .social-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        .carousel {
+            display: none; /* Los carruseles estarán ocultos inicialmente */
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .info-section {
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+.info-section img {
+    width: 280px;
+    margin-right: 20px;
+    border-radius: 13px; /* Ajusta el valor para hacer más o menos curvo el borde */
+    overflow: hidden; /* Asegura que el contenido no se desborde fuera de los bordes curvos */
+    max-width: 300px; /* Limita el ancho máximo de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.texto {
+    max-width: 400px; /* Limita el ancho del texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.texto h2 {
+    font-size: 24px;
+    color: #000000; /* Cambia el color del título si lo prefieres */
+    margin-bottom: 10px;
+}
+
+.texto p {
+    font-size: 16px;
+    color: #333333; /* Color del texto de la descripción */
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .info-section {
+        flex-direction: column; /* Cambia a disposición en columna en pantallas pequeñas */
+        text-align: center; /* Centra el contenido en pantallas pequeñas */
+    }
+
+    .info-section img {
+        margin-right: 0; /* Elimina el margen en pantallas pequeñas */
+        margin-bottom: 20px; /* Agrega espacio debajo de la imagen */
+    }
+}
+
+        /* Media query para pantallas pequeñas (móviles) */
+    @media screen and (max-width: 600px) {
+        .info-producto {
+            width: 90%; /* Ajusta el ancho para que ocupe el 90% de la pantalla del móvil */
+            padding: 10px; /* Reduce el padding para pantallas pequeñas */
+        }
+        
+        .info-producto h2, .info-producto p {
+            font-size: 1rem; /* Reduce el tamaño de la fuente para pantallas pequeñas */
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado y Navegación -->
+    <div class="navbar">
+        <div class="logo">
+            <a href="#"><img src="https://github.com/artemorfosis/ArteMorfosis/raw/main/LogoMorfosis-removebg-preview.png" alt="Logo" width="100"></a>
+        </div>
+    </div>
+
+    <div class="container-user">
+        <i class="fa-solid fa-user"></i>
+        <div class="menu"></div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="navbar">
+        <div class="logo"></div>
+        <div class="menu" style="justify-content: center;">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos" onclick="toggleMenu()">Productos</a>
+            <a href="#emprendimiento">Emprendimiento</a>
+            <a href="#footer">Contacto</a> <!-- Enlace de contacto al pie de página -->
+        </div>
+    </div>
+
+    <!-- Imagen Principal -->
+<div id="inicio" class="main-image">
+    <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/1727205638744%20(1)%20(1).png" alt="Imagen Principal">
+</div>
+
+    <!-- Sección de Productos -->
+    <div id="productos" class="products-section">
+        <h2>Productos</h2>
+        <button onclick="showCarousel('mdf')">MDF</button>
+        <button onclick="showCarousel('ceramica')">Cerámica</button>
+        <button onclick="showCarousel('plantas')">Plantas</button>
+    </div>
+
+    <!-- Carrusel MDF -->
+    <div id="mdf-carousel" class="carousel">
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/indivprinc%20(1).png" alt="MDF 1" onclick="showProductDetails('info-mdf1')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240906-WA0013.jpg" alt="MDF 2" onclick="showProductDetails('info-mdf2')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240906-WA0033.jpg" alt="MDF 3" onclick="showProductDetails('info-mdf3')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240906-WA0044.jpg" alt="MDF 4" onclick="showProductDetails('info-mdf4')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240912-WA0214.jpg" alt="MDF 5" onclick="showProductDetails('info-mdf5')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/Screenshot_20240906_122633_WhatsApp.jpg" alt="MDF 6" onclick="showProductDetails('info-mdf6')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_083749550.jpg" alt="MDF 7" onclick="showProductDetails('info-mdf7')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240912-WA0050.jpg" alt="MDF 8" onclick="showProductDetails('info-mdf8')">
+        </div>
+    </div>
+
+    <!-- Carrusel Cerámica -->
+    <div id="ceramica-carousel" class="carousel">
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_084131004.jpg" alt="Cerámica 1" onclick="showProductDetails('info-ceramica1')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240912-WA0116.jpg" alt="Cerámica 2" onclick="showProductDetails('info-ceramica2')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_085147690.jpg" alt="Cerámica 3" onclick="showProductDetails('info-ceramica3')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_084722977.jpg" alt="Cerámica 4" onclick="showProductDetails('info-ceramica4')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_084535164.jpg" alt="Cerámica 5" onclick="showProductDetails('info-ceramica5')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_084840923.jpg" alt="Cerámica 6" onclick="showProductDetails('info-ceramica6')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/IMG-20240906-WA0050.jpg" alt="Cerámica 7" onclick="showProductDetails('info-ceramica7')">
+        </div>
+    </div>
+
+    <!-- Carrusel Plantas -->
+    <div id="plantas-carousel" class="carousel">
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_094640392.jpg" alt="Planta 1" onclick="showProductDetails('info-planta1')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_103926347.jpg" alt="Planta 2" onclick="showProductDetails('info-planta2')">
+            <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/FunPic_20240924_103244835.jpg" alt="Planta 3" onclick="showProductDetails('info-planta3')">
+        </div>
+    </div>
+
+    <!-- Información de los productos -->
+    <div id="info-mdf1" class="info-producto">
+        <h2>Individuales</h2>
+        <p>Individuales redondos y rectangulares, perfectos para cualquier decoración. Material resistente y fácil de limpiar, ideales para uso diario o eventos especiales.</p>
+    </div>
+
+    <div id="info-mdf2" class="info-producto">
+        <h2>Porta Vasos</h2>
+        <p>Porta vasos personalizados que añaden un toque único a tu mesa. Hechos de materiales duraderos, son perfectos para proteger tus superficies y mostrar tu estilo personal en cualquier ocasión.</p>
+    </div>
+
+    <div id="info-mdf3" class="info-producto">
+        <h2>Cuadros</h2>
+        <p>Cuadros de madera con imagen personalizada, ideales para decorar tu espacio con un toque personal. Hechos con materiales de alta calidad, estos cuadros son perfectos para regalar o para embellecer tu hogar.</p>
+    </div>
+
+    <div id="info-mdf4" class="info-producto">
+        <h2>Imanes</h2>
+        <p>Imanes personalizados que añaden un toque divertido a tu nevera. Perfectos para guardar tus notas y recuerdos, estos imanes son una forma creativa de mostrar tu estilo único.</p>
+    </div>
+
+    <div id="info-mdf5" class="info-producto">
+        <h2>Cuadros Puntillismo</h2>
+        <p>Cuadros de puntillismo personalizados en los colores que elijas. Cada pieza es única, creando un efecto visual impresionante que añade un toque artístico a cualquier espacio.</p>
+    </div>
+
+    <div id="info-mdf6" class="info-producto">
+        <h2>Alcancías</h2>
+        <p>Alcancías pintadas personalizadas con el diseño que elijas. Perfectas para ahorrar con estilo, cada alcancía es una obra de arte única que se adapta a tu decoración.</p>
+    </div>
+
+    <div id="info-mdf7" class="info-producto">
+        <h2>Porta Celulares</h2>
+        <p>Porta celulares personalizados con la imagen que desees. Diseñados para proteger tu dispositivo con estilo, son una forma única de mostrar tu personalidad y creatividad.</p>
+    </div>
+
+    <div id="info-mdf8" class="info-producto">
+        <h2>Servilletero</h2>
+        <p>Servilletero personalizado que añade un toque único a tu mesa. Hecho con materiales duraderos, es ideal para cualquier ocasión y perfecto para mostrar tu estilo.</p>
+    </div>
+
+    <div id="info-ceramica1" class="info-producto">
+        <h2>Materas</h2>
+        <p>Materas de cerámica personalizadas en la figura que desees. Perfectas para realzar cualquier espacio, cada matera combina funcionalidad y un diseño único.</p>
+    </div>
+
+    <div id="info-ceramica2" class="info-producto">
+        <h2>Ángeles</h2>
+        <p>Ángeles de cerámica con diferentes diseños y alas que resaltan. Cada pieza es una obra de arte que aporta un toque celestial y encantador a tu decoración.</p>
+    </div>
+
+    <div id="info-ceramica3" class="info-producto">
+        <h2>Astronautas</h2>
+        <p>Astronautas de cerámica en varios colores y posiciones. Estas divertidas figuras añaden un toque espacial a tu decoración, perfectas para los amantes del cosmos.</p>
+    </div>
+
+    <div id="info-ceramica4" class="info-producto">
+        <h2>Alas</h2>
+        <p>Alas de cerámica grandes o pequeñas, en una gran variedad de colores. Perfectas para decorar cualquier espacio, cada par de alas es una expresión de encantadora libertad.</p>
+    </div>
+
+    <div id="info-ceramica5" class="info-producto">
+        <h2>Vírgenes</h2>
+        <p>Virgencitas de cerámica en una variedad de colores, personalizadas según el tipo de virgen. Cada figura es una hermosa representación que aporta paz y espiritualidad a tu espacio.</p>
+    </div>
+
+    <div id="info-ceramica6" class="info-producto">
+        <h2>Groots</h2>
+        <p>Groot de los Guardianes de la Galaxia en distintas posiciones. Estas figuras de cerámica capturan la esencia del personaje, añadiendo un toque divertido y encantador a tu colección.</p>
+    </div>
+
+    <div id="info-ceramica7" class="info-producto">
+        <h2>Decorativos</h2>
+        <p>Decoración en cerámica personalizada con el diseño que elijas. Perfecta para embellecer cualquier espacio, cada pieza es única y refleja tu estilo personal.</p>
+    </div>
+
+    <div id="info-planta1" class="info-producto">
+        <h2>Suculentas</h2>
+        <p>Suculentas de diferentes tipos, ideales para cualquier espacio. Estas plantas de bajo mantenimiento añaden un toque de frescura y belleza natural a tu hogar, perfectas para quienes buscan un toque verde sin complicaciones.</p>
+    </div>
+
+    <div id="info-planta2" class="info-producto">
+        <h2>Terrarios</h2>
+        <p>Terrarios de diferentes diseños, perfectos para añadir un toque verde a tu hogar. Estos ecosistemas en miniatura son fáciles de cuidar y crean un ambiente natural y relajante en cualquier espacio.</p>
+    </div>
+
+    <div id="info-planta3" class="info-producto">
+        <h2>Baldes</h2>
+        <p>Plantitas dentro de baldes decorativos, ideales para realzar cualquier espacio. Estas añaden un toque rústico y alegre a tu hogar, perfectas para quienes aman la naturaleza.</p>
+    </div>
+
+    <!-- Sección de Emprendimiento --> 
+<div id="emprendimiento" class="info-section"> 
+    <img src="https://raw.githubusercontent.com/artemorfosis/ArteMorfosis/refs/heads/main/ChatOn%20image%20(1).png" alt="Emprendimiento"> 
+    <div class="texto">
+        <h2>Emprendimiento</h2> 
+        <p>En mi emprendimiento, me apasiona la naturaleza y creatividad. Ofrezco una variedad de productos, desde decoración en MDF y cerámica hasta hermosas plantas que destacan cualquier espacio. Cada artículo es creado con amor y dedicación, reflejando la gran conexión que tengo con el entorno natural. Además, hay descuentos especiales y productos únicos según la temporada y eventos del año, asegurando que siempre encuentres algo fresco y emocionante. Todo está hecho a mano y sobre todo con amor.</p> 
+    </div> 
+</div>
+
+
+    <!-- Pie de Página -->
+    <div id="footer" class="footer">
+        <div class="social-links">
+            <a href="https://wa.me/3113903575">WhatsApp</a>
+            <a href="https://www.instagram.com/artemorfosiss?igsh=MXN0dzNqZW5qY2ZidQ==">Instagram</a>
+            <a href="https://www.facebook.com/arteamano.artesana">Facebook</a>
+        </div>
+        <p>Email: adrianamejiamora@gmail.com | Tel: (+57) 311 390 3575 </p>
+
+    </div>
+
+    <script>
+        function showCarousel(product) {
+            // Ocultar todos los carruseles
+            document.querySelectorAll('.carousel').forEach(carousel => carousel.style.display = 'none');
+            
+            // Mostrar el carrusel seleccionado
+            document.getElementById(product + '-carousel').style.display = 'block';
+        }
+
+        function showProductDetails(infoId) {
+            // Ocultar todos los detalles de productos
+            document.querySelectorAll('.info-producto').forEach(info => info.style.display = 'none');
+            
+            // Mostrar los detalles del producto seleccionado
+            document.getElementById(infoId).style.display = 'block';
+        }
+    </script>
+</body> 
+</html>
